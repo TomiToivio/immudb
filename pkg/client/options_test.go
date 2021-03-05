@@ -41,7 +41,9 @@ func TestOptions(t *testing.T) {
 		WithAuth(true).
 		WithMaxRecvMsgSize(1 << 20).
 		WithConfig("configfile").
-		WithTokenFileName("tokenfile")
+		WithTokenFileName("tokenfile").
+		WithStreamChunkSize(4096)
+
 	if op.LogFileName != "logfilename" ||
 		op.PrometheusHost != "localhost" ||
 		op.PrometheusPort != "1234" ||
@@ -60,6 +62,7 @@ func TestOptions(t *testing.T) {
 		op.MaxRecvMsgSize != 1<<20 ||
 		op.Config != "configfile" ||
 		op.TokenFileName != "tokenfile" ||
+		op.StreamChunkSize != 4096 ||
 		op.Bind() != "127.0.0.1:4321" ||
 		len(op.String()) == 0 {
 		t.Fatal("Client options fail")
